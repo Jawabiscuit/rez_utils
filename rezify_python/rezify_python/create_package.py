@@ -1,13 +1,15 @@
+import distutils  # noqa # pylint: disable=unused-import
 import os
 import shutil
 import logging
 import subprocess
 import urllib.request
 import tempfile
-import distutils.dir_util
+from distutils import dir_util
 from textwrap import dedent
 from rez.package_py_utils import expand_requires
 from rez.package_maker import make_package
+
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -47,7 +49,7 @@ def create_package(packages_path, python_version):
         source_path = os.path.join(temp_folder, "python." + python_version, "tools")
 
         def make_root(variant, path):
-            distutils.dir_util.copy_tree(source_path, path)
+            dir_util.copy_tree(source_path, path)
 
         with make_package("python", packages_path, make_root=make_root) as pkg:
             pkg.version = python_version

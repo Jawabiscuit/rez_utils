@@ -3,6 +3,7 @@ Entrypoint for CLI.
 """
 import click
 from rez.config import config
+
 from .create_package import create_package
 
 
@@ -13,9 +14,7 @@ from .create_package import create_package
     is_flag=True,
     help="Release to release path instead of local path",
 )
-@click.option(
-    "--packages_path", "-p", help="Release to custom path, overrides --release"
-)
+@click.option("--packages_path", "-p", help="Release to custom path, overrides --release")
 @click.option(
     "--python_version",
     "-v",

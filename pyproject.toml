@@ -1,0 +1,14 @@
+[tool.black]
+# https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-format
+line-length = 90
+target-version = ["py39"]
+
+[tool.isort]
+# https://black.readthedocs.io/en/stable/guides/using_black_with_other_tools.html
+profile = "black"
+line_length = 90
+
+[tool.ruff]
+# https://github.com/charliermarsh/ruff#configuration
+line-length = 90
+target-version = "py39"

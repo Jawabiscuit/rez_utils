@@ -1,23 +1,22 @@
 import distutils  # noqa # pylint: disable=unused-import
+import logging
 import os
 import shutil
-import logging
 import subprocess
-import urllib.request
 import tempfile
+import urllib.request
 from distutils import dir_util
 from textwrap import dedent
-from rez.package_py_utils import expand_requires
-from rez.package_maker import make_package
 
+from rez.package_maker import make_package
+from rez.package_py_utils import expand_requires
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
 
 def create_package(packages_path, python_version):
-    """Release a python nuget package as rez package.
-    """
+    """Release a python nuget package as rez package."""
     try:
         temp_folder = tempfile.mkdtemp(prefix="rezpy-")
         nuget_path = os.path.join(temp_folder, "nuget.exe")
@@ -58,11 +57,13 @@ def create_package(packages_path, python_version):
             pkg.uuid = "8c94dcaa-404f-44c7-9ede-25fbb932b98d"
             pkg.homepage = "http://www.python.org"
             pkg.variants = [expand_requires("platform-*", "arch-*")]
-            pkg.commands = dedent("""\
+            pkg.commands = dedent(
+                """\
                 import os
                 env.PATH.append(this.root)
                 env.PATH.append(os.path.join(this.root, "DLLs"))
-            """)
+            """
+            )
     except Exception as e:
         log.error(e)
 
